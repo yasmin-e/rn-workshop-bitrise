@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { QuizQuestion } from './components';
 import { decodeResponse } from './helpers';
 import { IQuiz, IResponse } from './interfaces';
+import { Game, EndGame } from './screens';
 
-const API_URL = 'https://opentdb.com/api.php?amount=10&encode=url3986';
+const MAX_QUESTIONS = 10;
+const API_URL = `https://opentdb.com/api.php?amount=${MAX_QUESTIONS}&encode=url3986`;
 const MAX_LIVES = 3;
 
 export default function App() {
@@ -26,7 +28,7 @@ export default function App() {
       const currentQuestion = questions[currentQuestionIndex];
       if (answer === currentQuestion.correct_answer) {
         // TODO: correct
-        setCurrentQuestionIndex((c) => (c += 1));
+        setCurrentQuestionIndex((c) => c + 1);
       } else {
         // TODO: incorrect
       }
@@ -34,13 +36,24 @@ export default function App() {
     [questions, currentQuestionIndex]
   );
 
+  const handleResetGame = () => {
+    setLives(MAX_LIVES);
+    setCurrentQuestionIndex(0);
+    // TODO: get new questions
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      {questions[currentQuestionIndex] && (
-        <QuizQuestion
-          onAnswerSelected={handleAnswerSelected}
-          {...questions[currentQuestionIndex]}
-        ></QuizQuestion>
+      {currentQuestionIndex !== MAX_QUESTIONS && lives > 0 && (
+        <Game
+          currentIndex={currentQuestionIndex}
+          questions={questions}
+          handleAnswerSelected={handleAnswerSelected}
+        />
+      )}
+
+      {(lives === 0 || currentQuestionIndex === MAX_QUESTIONS) && (
+        <EndGame onResetGame={handleResetGame} isGameOver={lives === 0} />
       )}
     </SafeAreaView>
   );

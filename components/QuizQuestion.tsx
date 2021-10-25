@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   },
   titleWrapper: {
     padding: 30,
-    height: 150,
     justifyContent: 'center',
   },
   answerText: {
