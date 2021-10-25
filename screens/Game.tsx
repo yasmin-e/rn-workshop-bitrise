@@ -1,5 +1,11 @@
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Dimensions,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { Button, QuizQuestion } from '../components';
 import { MAX_QUESTIONS } from '../config';
 import { IQuiz } from '../interfaces';
@@ -12,6 +18,7 @@ interface IProps {
   currentIndex: number;
   handleAnswerSelected: (answer: string) => void;
   onResetGame: () => void;
+  isLoading: boolean;
 }
 
 const Game = ({
@@ -19,8 +26,11 @@ const Game = ({
   questions,
   handleAnswerSelected,
   onResetGame,
+  isLoading,
 }: IProps) => {
-  // TODO: add loading indicator
+  const currentQuestion =
+    questions.length > 0 ? questions[currentIndex] : undefined;
+
   return (
     <>
       <View style={styles.row}>
@@ -36,10 +46,15 @@ const Game = ({
         <Text>{`${currentIndex + 1} / ${MAX_QUESTIONS}`}</Text>
         <Button fullWidth={false} inverted text="50 / 50" />
       </View>
-      {questions[currentIndex] && (
+
+      {isLoading || !currentQuestion ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="darkblue" />
+        </View>
+      ) : (
         <QuizQuestion
           onAnswerSelected={handleAnswerSelected}
-          {...questions[currentIndex]}
+          {...currentQuestion}
         ></QuizQuestion>
       )}
     </>
@@ -70,6 +85,11 @@ const styles = StyleSheet.create({
   counterText: {
     color: 'white',
     fontSize: 50,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

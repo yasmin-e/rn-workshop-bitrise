@@ -1,27 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { QuizQuestion } from './components';
-import { MAX_QUESTIONS } from './config';
-import { decodeResponse } from './helpers';
-import { IQuiz, IResponse } from './interfaces';
+import React, { useCallback, useState } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { MAX_LIVES, MAX_QUESTIONS } from './config';
+import { useQuiz } from './hooks';
 import { Game, EndGame } from './screens';
 
-const API_URL = `https://opentdb.com/api.php?amount=${MAX_QUESTIONS}&encode=url3986`;
-const MAX_LIVES = 3;
-
 export default function App() {
-  const [questions, setQuestions] = useState<IQuiz[]>([]);
+  const { questions, reload, isLoading } = useQuiz();
   const [lives, setLives] = useState(MAX_LIVES);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-  useEffect(() => {
-    fetch(API_URL)
-      .then((r) => r.json())
-      .then((res: IResponse) => {
-        const decoded = decodeResponse(res);
-        setQuestions(decoded.results);
-      });
-  }, []);
 
   const handleAnswerSelected = useCallback(
     (answer) => {
@@ -39,7 +25,7 @@ export default function App() {
   const handleResetGame = () => {
     setLives(MAX_LIVES);
     setCurrentQuestionIndex(0);
-    // TODO: get new questions
+    reload();
   };
 
   return (
@@ -50,6 +36,7 @@ export default function App() {
           questions={questions}
           handleAnswerSelected={handleAnswerSelected}
           onResetGame={handleResetGame}
+          isLoading={isLoading}
         />
       )}
 
