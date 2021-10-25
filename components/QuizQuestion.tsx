@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { shuffle } from '../helpers';
 import { IQuiz } from '../interfaces';
+import Button from './Button';
 
 interface IProps extends IQuiz {
   onAnswerSelected: (answer: string) => void;
@@ -23,14 +24,12 @@ const QuizQuestion = ({
 
       <View style={styles.answerList}>
         {allAnswers.map((ans) => (
-          <TouchableOpacity
+          <Button
             key={ans}
             onPress={() => onAnswerSelected(ans)}
             activeOpacity={0.6}
-            style={styles.answer}
-          >
-            <Text style={styles.answerText}>{ans}</Text>
-          </TouchableOpacity>
+            text={ans}
+          ></Button>
         ))}
       </View>
     </View>
@@ -48,23 +47,11 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   titleWrapper: {
-    padding: 30,
+    paddingHorizontal: 15,
+    paddingVertical: 15,
     justifyContent: 'center',
   },
-  answerText: {
-    color: 'white',
-    fontSize: 18,
-  },
-  answer: {
-    backgroundColor: 'darkblue',
-    width: '100%',
-    margin: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 15,
-    borderColor: 'white',
-    borderWidth: 2,
-  },
+
   answerList: {
     justifyContent: 'center',
     alignItems: 'center',

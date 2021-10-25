@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Dimensions, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { QuizQuestion } from './components';
+import { MAX_QUESTIONS } from './config';
 import { decodeResponse } from './helpers';
 import { IQuiz, IResponse } from './interfaces';
 import { Game, EndGame } from './screens';
 
-const MAX_QUESTIONS = 10;
 const API_URL = `https://opentdb.com/api.php?amount=${MAX_QUESTIONS}&encode=url3986`;
 const MAX_LIVES = 3;
 
@@ -49,6 +49,7 @@ export default function App() {
           currentIndex={currentQuestionIndex}
           questions={questions}
           handleAnswerSelected={handleAnswerSelected}
+          onResetGame={handleResetGame}
         />
       )}
 

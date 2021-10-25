@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import { QuizQuestion } from '../components';
+import { Button, QuizQuestion } from '../components';
+import { MAX_QUESTIONS } from '../config';
 import { IQuiz } from '../interfaces';
 
 const { width } = Dimensions.get('screen');
@@ -10,17 +11,30 @@ interface IProps {
   questions: IQuiz[];
   currentIndex: number;
   handleAnswerSelected: (answer: string) => void;
+  onResetGame: () => void;
 }
 
-const Game = ({ currentIndex, questions, handleAnswerSelected }: IProps) => {
+const Game = ({
+  currentIndex,
+  questions,
+  handleAnswerSelected,
+  onResetGame,
+}: IProps) => {
   // TODO: add loading indicator
   return (
     <>
-      <View>
-        <Text>Quiz</Text>
+      <View style={styles.row}>
+        <Text style={styles.header}>Quiz</Text>
+        <Button
+          fullWidth={false}
+          onPress={onResetGame}
+          inverted
+          text="New game"
+        />
       </View>
-      <View style={styles.counter}>
-        <Text style={styles.counterText}>{currentIndex + 1}</Text>
+      <View style={styles.row}>
+        <Text>{`${currentIndex + 1} / ${MAX_QUESTIONS}`}</Text>
+        <Button fullWidth={false} inverted text="50 / 50" />
       </View>
       {questions[currentIndex] && (
         <QuizQuestion
@@ -33,6 +47,16 @@ const Game = ({ currentIndex, questions, handleAnswerSelected }: IProps) => {
 };
 
 const styles = StyleSheet.create({
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    alignItems: 'flex-end',
+  },
+  header: {
+    fontSize: 50,
+  },
   counter: {
     borderWidth: 1,
     width: counterSize,
