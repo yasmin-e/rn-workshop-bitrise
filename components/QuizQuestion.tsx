@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { shuffle } from '../helpers';
 import { IQuiz } from '../interfaces';
@@ -14,7 +14,9 @@ const QuizQuestion = ({
   question,
   onAnswerSelected,
 }: IProps) => {
-  const allAnswers = shuffle([correct_answer, ...incorrect_answers]);
+  const allAnswers = useRef(
+    shuffle([correct_answer, ...incorrect_answers])
+  ).current;
 
   return (
     <View style={styles.wrapper}>

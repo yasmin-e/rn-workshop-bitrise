@@ -13,10 +13,9 @@ export default function App() {
     (answer) => {
       const currentQuestion = questions[currentQuestionIndex];
       if (answer === currentQuestion.correct_answer) {
-        // TODO: correct
         setCurrentQuestionIndex((c) => c + 1);
       } else {
-        // TODO: incorrect
+        setLives((l) => l - 1);
       }
     },
     [questions, currentQuestionIndex]
@@ -41,7 +40,11 @@ export default function App() {
       )}
 
       {(lives === 0 || currentQuestionIndex === MAX_QUESTIONS) && (
-        <EndGame onResetGame={handleResetGame} isGameOver={lives === 0} />
+        <EndGame
+          onResetGame={handleResetGame}
+          isGameOver={lives === 0}
+          currentIndex={currentQuestionIndex}
+        />
       )}
     </SafeAreaView>
   );
