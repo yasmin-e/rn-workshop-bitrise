@@ -12,3 +12,6 @@ export const decodeResponse = (res: IResponse): IResponse => {
     })),
   };
 };
+
+export const shuffle = <T extends unknown>(arr: T[]) =>
+  [...arr].sort(() => Math.random() - 0.5);
