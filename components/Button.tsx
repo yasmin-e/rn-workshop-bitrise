@@ -17,6 +17,7 @@ const Button = ({
   inverted,
   text,
   fullWidth = true,
+  style,
   ...props
 }: React.PropsWithChildren<IProps>) => {
   return (
@@ -26,6 +27,7 @@ const Button = ({
         styles.baseButton,
         inverted && styles.invertedButton,
         fullWidth && styles.fullWidth,
+        style,
       ]}
     >
       {!!text && (

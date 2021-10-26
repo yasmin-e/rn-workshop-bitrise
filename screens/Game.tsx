@@ -1,18 +1,9 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Button, QuizQuestion } from '../components';
 import { maxLives, maxQuestions } from '../config';
 import { IQuiz } from '../interfaces';
-
-const { width } = Dimensions.get('screen');
-const counterSize = width * 0.3;
 
 interface IProps {
   questions: IQuiz[];
@@ -86,20 +77,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   header: {
-    fontSize: 50,
-  },
-  counter: {
-    borderWidth: 1,
-    width: counterSize,
-    height: counterSize,
-    borderRadius: counterSize,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    backgroundColor: 'darkblue',
-  },
-  counterText: {
-    color: 'white',
     fontSize: 50,
   },
   loadingContainer: {

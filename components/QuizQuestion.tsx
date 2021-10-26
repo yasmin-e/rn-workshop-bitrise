@@ -32,7 +32,8 @@ const QuizQuestion = ({
             onPress={() => onAnswerSelected(ans)}
             activeOpacity={0.6}
             text={ans}
-          ></Button>
+            style={styles.button}
+          />
         ))}
       </View>
     </View>
@@ -53,13 +54,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 15,
     justifyContent: 'center',
+    height: 200,
   },
-
   answerList: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
     padding: 30,
+  },
+  button: {
+    marginBottom: 30,
   },
 });
 
