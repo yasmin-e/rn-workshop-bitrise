@@ -37,7 +37,9 @@ const Game = ({
         />
       </View>
       <View style={styles.row}>
-        <Text>{`${currentIndex + 1} / ${maxQuestions}`}</Text>
+        <Text testID="currentStep">
+          {`${currentIndex + 1} / ${maxQuestions}`}
+        </Text>
         {Array(maxLives)
           .fill('')
           .map((_, i) => (

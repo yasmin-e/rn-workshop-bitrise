@@ -1,11 +1,24 @@
-import { render, fireEvent } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import App from '../App';
 import React from 'react';
+import { maxLives, maxQuestions } from '../config';
 
-test('form submits two answers', () => {
-  const mockFn = jest.fn();
+describe('Game', () => {
+  it('should have maximum lives by default', () => {
+    const { getAllByTestId } = render(<App />);
+    const hearts = getAllByTestId('heart-live');
+    expect(hearts).toHaveLength(maxLives);
 
-  const { getByText, findAllByTestId } = render(<App></App>);
-  const newGameButton = getByText('New game');
-  const hearts = findAllByTestId('heart-live');
+    const activeHearts = hearts.filter((element) =>
+      element.findByProps({ color: 'red' })
+    );
+    expect(activeHearts).toHaveLength(maxLives);
+  });
+
+  it('should show the first step', () => {
+    const { getByTestId } = render(<App />);
+    const stepText = getByTestId('currentStep');
+
+    expect(stepText.children[0]).toBe(`1 / ${maxQuestions}`);
+  });
 });
