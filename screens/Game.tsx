@@ -7,9 +7,8 @@ import {
   View,
 } from 'react-native';
 import { Button, QuizQuestion } from '../components';
-import { MAX_QUESTIONS } from '../config';
+import { maxQuestions } from '../config';
 import { IQuiz } from '../interfaces';
-
 const { width } = Dimensions.get('screen');
 const counterSize = width * 0.3;
 
@@ -43,7 +42,7 @@ const Game = ({
         />
       </View>
       <View style={styles.row}>
-        <Text>{`${currentIndex + 1} / ${MAX_QUESTIONS}`}</Text>
+        <Text>{`${currentIndex + 1} / ${maxQuestions}`}</Text>
         <Button fullWidth={false} inverted text="50 / 50" />
       </View>
 

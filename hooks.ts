@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { API_URL } from './config';
+import { apiUrl } from './config';
 import { decodeResponse } from './helpers';
 import { IQuiz } from './interfaces';
 
@@ -10,7 +10,7 @@ export function useQuiz() {
   const reload = useCallback(async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(apiUrl);
       const json = await res.json();
       const decoded = decodeResponse(json);
       setQuestions(decoded.results);

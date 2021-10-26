@@ -1,19 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import { MAX_LIVES, MAX_QUESTIONS } from './config';
+import { maxLives, maxQuestions } from './config';
 import { useQuiz } from './hooks';
 import { Game, EndGame } from './screens';
 
 export default function App() {
   const { questions, reload, isLoading } = useQuiz();
-  const [lives, setLives] = useState(MAX_LIVES);
+  const [lives, setLives] = useState(maxLives);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const handleAnswerSelected = useCallback(
     (answer) => {
       const currentQuestion = questions[currentQuestionIndex];
       if (answer === currentQuestion.correct_answer) {
-        setCurrentQuestionIndex((c) => c + 1);
+        setCurrentQuestionIndex((i) => i + 1);
       } else {
         setLives((l) => l - 1);
       }
@@ -22,14 +22,14 @@ export default function App() {
   );
 
   const handleResetGame = () => {
-    setLives(MAX_LIVES);
+    setLives(maxLives);
     setCurrentQuestionIndex(0);
     reload();
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      {currentQuestionIndex !== MAX_QUESTIONS && lives > 0 && (
+      {currentQuestionIndex !== maxQuestions && lives > 0 && (
         <Game
           currentIndex={currentQuestionIndex}
           questions={questions}
@@ -39,7 +39,7 @@ export default function App() {
         />
       )}
 
-      {(lives === 0 || currentQuestionIndex === MAX_QUESTIONS) && (
+      {(lives === 0 || currentQuestionIndex === maxQuestions) && (
         <EndGame
           onResetGame={handleResetGame}
           isGameOver={lives === 0}

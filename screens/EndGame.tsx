@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
-import { MAX_QUESTIONS } from '../config';
+import { maxQuestions } from '../config';
 
 interface IProps {
   isGameOver: boolean;
@@ -18,7 +18,7 @@ const EndGame = ({ isGameOver, onResetGame, currentIndex }: IProps) => {
       {isGameOver && (
         <Text
           style={styles.scoreText}
-        >{`${currentIndex} / ${MAX_QUESTIONS}`}</Text>
+        >{`${currentIndex} / ${maxQuestions}`}</Text>
       )}
 
       <TouchableOpacity onPress={onResetGame} style={styles.button}>
