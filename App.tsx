@@ -36,6 +36,7 @@ export default function App() {
           handleAnswerSelected={handleAnswerSelected}
           onResetGame={handleResetGame}
           isLoading={isLoading}
+          lives={lives}
         />
       )}
 

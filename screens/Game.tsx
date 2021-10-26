@@ -6,9 +6,11 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { Button, QuizQuestion } from '../components';
-import { maxQuestions } from '../config';
+import { maxLives, maxQuestions } from '../config';
 import { IQuiz } from '../interfaces';
+
 const { width } = Dimensions.get('screen');
 const counterSize = width * 0.3;
 
@@ -18,6 +20,7 @@ interface IProps {
   handleAnswerSelected: (answer: string) => void;
   onResetGame: () => void;
   isLoading: boolean;
+  lives: number;
 }
 
 const Game = ({
@@ -26,6 +29,7 @@ const Game = ({
   handleAnswerSelected,
   onResetGame,
   isLoading,
+  lives,
 }: IProps) => {
   const currentQuestion =
     questions.length > 0 ? questions[currentIndex] : undefined;
@@ -43,6 +47,19 @@ const Game = ({
       </View>
       <View style={styles.row}>
         <Text>{`${currentIndex + 1} / ${maxQuestions}`}</Text>
+        {Array(maxLives)
+          .fill('')
+          .map((_, i) => (
+            <Icon
+              key={i}
+              name="heart"
+              tvParallaxProperties
+              type="entypo"
+              color={i < lives ? 'red' : 'white'}
+              size={40}
+            />
+          ))}
+
         <Button fullWidth={false} inverted text="50 / 50" />
       </View>
 
