@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
-import { shuffle } from '../helpers';
-import { IQuiz } from '../interfaces';
+import { shuffle } from '../../helpers';
+import { IQuiz } from '../../interfaces';
 import Button from './Button';
 
 interface IProps extends IQuiz {

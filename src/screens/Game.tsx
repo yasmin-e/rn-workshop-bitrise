@@ -3,7 +3,7 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Button, QuizQuestion } from '../components';
 import { maxLives, maxQuestions } from '../config';
-import { IQuiz } from '../interfaces';
+import { IQuiz } from '../../interfaces';
 
 interface IProps {
   questions: IQuiz[];

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { apiUrl } from './config';
+import { apiUrl } from './src/config';
 import { decodeResponse } from './helpers';
 import { IQuiz } from './interfaces';
 
