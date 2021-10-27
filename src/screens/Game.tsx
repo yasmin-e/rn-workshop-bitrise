@@ -48,7 +48,7 @@ const Game = ({
               name="heart"
               tvParallaxProperties
               type="entypo"
-              testID="heart-live"
+              testID={`heart-${i < lives ? 'full' : 'empty'}`}
               color={i < lives ? 'red' : 'white'}
               size={40}
             />

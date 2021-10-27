@@ -22,13 +22,16 @@ const QuizQuestion = ({
   return (
     <View style={styles.wrapper}>
       <View style={styles.titleWrapper}>
-        <Text style={styles.title}>{question}</Text>
+        <Text testID="question" style={styles.title}>
+          {question}
+        </Text>
       </View>
 
       <View style={styles.answerList}>
-        {allAnswers.map((ans) => (
+        {allAnswers.map((ans, i) => (
           <Button
             key={ans}
+            testID={`answer-${i}`}
             onPress={() => onAnswerSelected(ans)}
             activeOpacity={0.6}
             text={ans}

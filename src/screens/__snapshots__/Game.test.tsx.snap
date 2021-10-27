@@ -86,7 +86,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-full"
         tvParallaxProperties={true}
       >
         <View
@@ -110,7 +110,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-full"
         tvParallaxProperties={true}
       >
         <View
@@ -134,7 +134,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-empty"
         tvParallaxProperties={true}
       >
         <View
@@ -295,7 +295,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-full"
         tvParallaxProperties={true}
       >
         <View
@@ -341,7 +341,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-full"
         tvParallaxProperties={true}
       >
         <View
@@ -387,7 +387,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-empty"
         tvParallaxProperties={true}
       >
         <View
@@ -570,7 +570,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-full"
         tvParallaxProperties={true}
       >
         <View
@@ -616,7 +616,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-full"
         tvParallaxProperties={true}
       >
         <View
@@ -662,7 +662,7 @@ Array [
       }
     >
       <View
-        testID="heart-live"
+        testID="heart-empty"
         tvParallaxProperties={true}
       >
         <View
@@ -766,6 +766,7 @@ Array [
             "fontWeight": "800",
           }
         }
+        testID="question"
       >
         Question
       </Text>
@@ -804,6 +805,7 @@ Array [
             "width": "100%",
           }
         }
+        testID="answer-0"
       >
         <Text
           style={
@@ -843,6 +845,7 @@ Array [
             "width": "100%",
           }
         }
+        testID="answer-1"
       >
         <Text
           style={
@@ -882,6 +885,7 @@ Array [
             "width": "100%",
           }
         }
+        testID="answer-2"
       >
         <Text
           style={
@@ -921,6 +925,7 @@ Array [
             "width": "100%",
           }
         }
+        testID="answer-3"
       >
         <Text
           style={

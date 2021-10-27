@@ -1,4 +1,4 @@
-// jest.mock('../utils/helpers.ts');
+// jest.mock('../utils/helpers');
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import { Game } from '.';
