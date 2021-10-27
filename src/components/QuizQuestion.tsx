@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { shuffle } from '../helpers';
+import { shuffle } from '../utils';
 import { IQuiz } from '../interfaces';
 import Button from './Button';
 

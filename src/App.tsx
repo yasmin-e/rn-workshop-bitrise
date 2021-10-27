@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { maxLives, maxQuestions } from './config';
-import { useQuiz } from './hooks';
+import { useQuiz } from './utils';
 import { Game, EndGame } from './screens';
 
 export default function App() {

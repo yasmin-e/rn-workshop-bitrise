@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { apiUrl } from './config';
+import { apiUrl } from '../config';
 import { decodeResponse } from './helpers';
-import { IQuiz } from './interfaces';
+import { IQuiz } from '../interfaces';
 
 export function useQuiz() {
   const [questions, setQuestions] = useState<IQuiz[]>([]);

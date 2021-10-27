@@ -1,13 +1,15 @@
+// jest.mock('../utils/helpers.ts');
 import React from 'react';
 import { render } from '@testing-library/react-native';
 import { Game } from '.';
 import { IQuiz } from '../interfaces';
 
-jest.mock('../helpers', () => {
-  const og = jest.requireActual('../helpers');
+jest.mock('../utils/helpers', () => {
+  const og = jest.requireActual('../utils/helpers');
   return {
+    __esModule: true,
     ...og,
-    shuffle: jest.fn((arr: unknown[]) => arr),
+    shuffle: jest.fn((arr) => arr),
   };
 });
 

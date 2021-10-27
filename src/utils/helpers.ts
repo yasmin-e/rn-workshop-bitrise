@@ -1,4 +1,4 @@
-import { IResponse } from './interfaces';
+import { IResponse } from '../interfaces';
 
 export const decodeResponse = (res: IResponse): IResponse => {
   return {
