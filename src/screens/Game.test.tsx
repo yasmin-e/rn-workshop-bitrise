@@ -13,6 +13,15 @@ jest.mock('../utils/helpers', () => {
   };
 });
 
+const question: IQuiz = {
+  category: '1',
+  correct_answer: 'correct',
+  incorrect_answers: ['a', 'b', 'c'],
+  difficulty: 'medium',
+  question: 'Question',
+  type: 'multiple',
+};
+
 describe('Game', () => {
   const props = {
     currentIndex: 0,
@@ -31,21 +40,23 @@ describe('Game', () => {
   });
 
   it('should match snapshot with questions', () => {
-    const question: IQuiz = {
-      category: '1',
-      correct_answer: 'correct',
-      incorrect_answers: ['a', 'b', 'c'],
-      difficulty: 'medium',
-      question: 'Question',
-      type: 'multiple',
-    };
-
     const { toJSON } = render(<Game {...props} questions={[question]} />);
     expect(toJSON()).toMatchSnapshot();
   });
 
   it('should match snapshot while loading', () => {
     const { toJSON } = render(<Game {...props} isLoading />);
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('should match snapshot when lifeline is used', () => {
+    const easieQuestion: IQuiz = {
+      ...question,
+      incorrect_answers: [question.incorrect_answers[0]],
+    };
+    const { toJSON } = render(
+      <Game {...props} isLifelineUsed questions={[easieQuestion]} />
+    );
     expect(toJSON()).toMatchSnapshot();
   });
 });
