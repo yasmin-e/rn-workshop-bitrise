@@ -18,20 +18,29 @@ const Button = ({
   text,
   fullWidth = true,
   style,
+  disabled,
   ...props
 }: React.PropsWithChildren<IProps>) => {
   return (
     <TouchableOpacity
       {...props}
+      disabled={disabled}
       style={[
         styles.baseButton,
         inverted && styles.invertedButton,
         fullWidth && styles.fullWidth,
+        disabled && styles.disabled,
         style,
       ]}
     >
       {!!text && (
-        <Text style={[styles.baseText, inverted && styles.invertedText]}>
+        <Text
+          style={[
+            styles.baseText,
+            inverted && styles.invertedText,
+            disabled && styles.disabled,
+          ]}
+        >
           {text}
         </Text>
       )}
@@ -63,6 +72,11 @@ const styles = StyleSheet.create({
   },
   invertedText: {
     color: 'darkblue',
+  },
+  disabled: {
+    backgroundColor: 'lightgray',
+    borderColor: 'gray',
+    color: 'gray',
   },
 });
 

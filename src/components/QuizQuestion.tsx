@@ -1,34 +1,25 @@
 import React, { useMemo } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
-import { shuffle } from '../utils';
-import { IQuiz } from '../interfaces';
+
 import Button from './Button';
 
-interface IProps extends IQuiz {
+interface IProps {
   onAnswerSelected: (answer: string) => void;
+  answers: string[];
+  title: string;
 }
 
-const QuizQuestion = ({
-  correct_answer,
-  incorrect_answers,
-  question,
-  onAnswerSelected,
-}: IProps) => {
-  const allAnswers = useMemo(
-    () => shuffle([correct_answer, ...incorrect_answers]),
-    [correct_answer, incorrect_answers]
-  );
-
+const QuizQuestion = ({ onAnswerSelected, answers, title }: IProps) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.titleWrapper}>
         <Text testID="question" style={styles.title}>
-          {question}
+          {title}
         </Text>
       </View>
 
       <View style={styles.answerList}>
-        {allAnswers.map((ans, i) => (
+        {answers.map((ans, i) => (
           <Button
             key={ans}
             testID={`answer-${i}`}

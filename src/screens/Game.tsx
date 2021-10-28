@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Button, QuizQuestion } from '../components';
 import { maxLives, maxQuestions } from '../config';
 import { IQuiz } from '../interfaces';
+import { shuffle } from '../utils';
 
 interface IProps {
   questions: IQuiz[];
@@ -12,6 +13,8 @@ interface IProps {
   onResetGame: () => void;
   isLoading: boolean;
   lives: number;
+  isLifelineUsed: boolean;
+  setIsLifelineUsed: (val: boolean) => void;
 }
 
 const Game = ({
@@ -21,9 +24,38 @@ const Game = ({
   onResetGame,
   isLoading,
   lives,
+  isLifelineUsed,
+  setIsLifelineUsed,
 }: IProps) => {
   const currentQuestion =
     questions.length > 0 ? questions[currentIndex] : undefined;
+
+  const [answers, setAnswers] = useState<string[]>([]);
+  const shufled = useMemo(() => shuffle(answers), [answers]);
+
+  const handleLifelinePressed = useCallback(() => {
+    if (isLifelineUsed) return;
+
+    if (currentQuestion) {
+      const incorrectShuffled = shuffle(
+        currentQuestion.incorrect_answers
+      ).slice(0, 2);
+
+      setAnswers((all) =>
+        all.filter((ans) => !incorrectShuffled.includes(ans))
+      );
+      setIsLifelineUsed(true);
+    }
+  }, [currentQuestion]);
+
+  useEffect(() => {
+    if (currentQuestion) {
+      setAnswers([
+        currentQuestion.correct_answer,
+        ...currentQuestion.incorrect_answers,
+      ]);
+    }
+  }, [currentQuestion]);
 
   return (
     <>
@@ -54,7 +86,13 @@ const Game = ({
             />
           ))}
 
-        <Button fullWidth={false} inverted text="50 / 50" />
+        <Button
+          fullWidth={false}
+          onPress={handleLifelinePressed}
+          inverted
+          text="50 / 50"
+          disabled={isLifelineUsed || currentQuestion?.type === 'boolean'}
+        />
       </View>
 
       {isLoading || !currentQuestion ? (
@@ -64,7 +102,8 @@ const Game = ({
       ) : (
         <QuizQuestion
           onAnswerSelected={handleAnswerSelected}
-          {...currentQuestion}
+          title={currentQuestion.question}
+          answers={shufled}
         ></QuizQuestion>
       )}
     </>

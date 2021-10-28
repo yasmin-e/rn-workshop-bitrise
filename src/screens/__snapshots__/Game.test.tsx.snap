@@ -55,6 +55,7 @@ Array [
             Object {
               "color": "darkblue",
             },
+            undefined,
           ]
         }
       >
@@ -152,7 +153,7 @@ Array [
     </View>
     <View
       accessible={true}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -183,6 +184,7 @@ Array [
             Object {
               "color": "darkblue",
             },
+            false,
           ]
         }
       >
@@ -264,6 +266,7 @@ Array [
             Object {
               "color": "darkblue",
             },
+            undefined,
           ]
         }
       >
@@ -427,7 +430,7 @@ Array [
     </View>
     <View
       accessible={true}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -458,6 +461,7 @@ Array [
             Object {
               "color": "darkblue",
             },
+            false,
           ]
         }
       >
@@ -539,6 +543,7 @@ Array [
             Object {
               "color": "darkblue",
             },
+            undefined,
           ]
         }
       >
@@ -702,7 +707,7 @@ Array [
     </View>
     <View
       accessible={true}
-      focusable={false}
+      focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -733,6 +738,7 @@ Array [
             Object {
               "color": "darkblue",
             },
+            false,
           ]
         }
       >
@@ -815,6 +821,7 @@ Array [
                 "fontSize": 18,
               },
               undefined,
+              undefined,
             ]
           }
         >
@@ -854,6 +861,7 @@ Array [
                 "color": "white",
                 "fontSize": 18,
               },
+              undefined,
               undefined,
             ]
           }
@@ -895,6 +903,7 @@ Array [
                 "fontSize": 18,
               },
               undefined,
+              undefined,
             ]
           }
         >
@@ -934,6 +943,7 @@ Array [
                 "color": "white",
                 "fontSize": 18,
               },
+              undefined,
               undefined,
             ]
           }

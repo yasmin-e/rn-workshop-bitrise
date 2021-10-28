@@ -21,6 +21,8 @@ describe('Game', () => {
     lives: 2,
     questions: [],
     onResetGame: jest.fn(),
+    isLifelineUsed: false,
+    setIsLifelineUsed: jest.fn(),
   };
 
   it('should match snapshot for default case', () => {
