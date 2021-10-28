@@ -20,7 +20,7 @@ const res: IResponse = {
 };
 
 describe('Game', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     fetch.mockResponse(JSON.stringify(res));
   });
   it('should have maximum lives by default', async () => {
@@ -64,5 +64,20 @@ describe('Game', () => {
         `2 / ${maxQuestions}`
       );
     });
+  });
+
+  it('should halve the possible answers', async () => {
+    const { getByTestId, findAllByTestId } = render(<App />);
+
+    const button = getByTestId('thanos');
+
+    const allAnswers = await findAllByTestId(/answer-[0-9]/);
+
+    expect(allAnswers).toHaveLength(4);
+
+    fireEvent.press(button);
+    const answersAfterSnap = await findAllByTestId(/answer-[0-9]/);
+
+    expect(answersAfterSnap).toHaveLength(2);
   });
 });

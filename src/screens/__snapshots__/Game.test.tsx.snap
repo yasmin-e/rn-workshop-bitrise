@@ -173,6 +173,7 @@ Array [
           "paddingVertical": 10,
         }
       }
+      testID="thanos"
     >
       <Text
         style={
@@ -451,6 +452,7 @@ Array [
           "paddingVertical": 10,
         }
       }
+      testID="thanos"
     >
       <Text
         style={
@@ -841,6 +843,7 @@ Array [
           "paddingVertical": 10,
         }
       }
+      testID="thanos"
     >
       <Text
         style={
@@ -1118,6 +1121,7 @@ Array [
           "paddingVertical": 10,
         }
       }
+      testID="thanos"
     >
       <Text
         style={

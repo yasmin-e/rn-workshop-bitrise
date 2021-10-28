@@ -31,7 +31,7 @@ const Game = ({
     questions.length > 0 ? questions[currentIndex] : undefined;
 
   const [answers, setAnswers] = useState<string[]>([]);
-  const shufled = useMemo(() => shuffle(answers), [answers]);
+  const shuffled = useMemo(() => shuffle(answers), [answers]);
 
   const handleLifelinePressed = useCallback(() => {
     if (isLifelineUsed) return;
@@ -46,7 +46,7 @@ const Game = ({
       );
       setIsLifelineUsed(true);
     }
-  }, [currentQuestion]);
+  }, [currentQuestion, isLifelineUsed]);
 
   useEffect(() => {
     if (currentQuestion) {
@@ -91,6 +91,7 @@ const Game = ({
           onPress={handleLifelinePressed}
           inverted
           text="50 / 50"
+          testID="thanos"
           disabled={isLifelineUsed || currentQuestion?.type === 'boolean'}
         />
       </View>
@@ -103,7 +104,7 @@ const Game = ({
         <QuizQuestion
           onAnswerSelected={handleAnswerSelected}
           title={currentQuestion.question}
-          answers={shufled}
+          answers={shuffled}
         ></QuizQuestion>
       )}
     </>
