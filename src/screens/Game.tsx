@@ -13,8 +13,6 @@ interface IProps {
   onResetGame: () => void;
   isLoading: boolean;
   lives: number;
-  isLifelineUsed: boolean;
-  setIsLifelineUsed: (val: boolean) => void;
 }
 
 const Game = ({
@@ -24,29 +22,12 @@ const Game = ({
   onResetGame,
   isLoading,
   lives,
-  isLifelineUsed,
-  setIsLifelineUsed,
 }: IProps) => {
   const currentQuestion =
     questions.length > 0 ? questions[currentIndex] : undefined;
 
   const [answers, setAnswers] = useState<string[]>([]);
   const shuffled = useMemo(() => shuffle(answers), [answers]);
-
-  const handleLifelinePressed = useCallback(() => {
-    if (isLifelineUsed) return;
-
-    if (currentQuestion) {
-      const incorrectShuffled = shuffle(
-        currentQuestion.incorrect_answers
-      ).slice(0, 2);
-
-      setAnswers((all) =>
-        all.filter((ans) => !incorrectShuffled.includes(ans))
-      );
-      setIsLifelineUsed(true);
-    }
-  }, [currentQuestion, isLifelineUsed]);
 
   useEffect(() => {
     if (currentQuestion) {
@@ -86,14 +67,7 @@ const Game = ({
             />
           ))}
 
-        <Button
-          fullWidth={false}
-          onPress={handleLifelinePressed}
-          inverted
-          text="50 / 50"
-          testID="thanos"
-          disabled={isLifelineUsed || currentQuestion?.type === 'boolean'}
-        />
+        <Button fullWidth={false} inverted text="50 / 50" testID="thanos" />
       </View>
 
       {isLoading || !currentQuestion ? (
