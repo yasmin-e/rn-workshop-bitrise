@@ -24,14 +24,24 @@ workflows:
     steps:
     - cache-pull@2: {}
     - script@1:
-        title: Yarn Install dev
+        title: Yarn Install development mode
         inputs:
         - content: |-
             #!/usr/bin/env bash
             set -ex
 
             yarn
+    - script@1:
+        title: Run tests
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
             yarn test
+    - cache-push@2:
+        inputs:
+        - cache_paths: "./node_modules -> ./yarn.lock"
   publish:
     before_run:
     - _git-clone
@@ -44,7 +54,7 @@ workflows:
             #!/usr/bin/env bash
             set -ex
 
-            yarn add expo-cli
+            yarn global add expo-cli
             yarn
     - script@1:
         title: Expo publish
@@ -53,8 +63,8 @@ workflows:
             #!/usr/bin/env bash
             set -ex
 
-            ./node_modules/.bin/expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
-            ./node_modules/.bin/expo publish
+            expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+            expo publish
     - cache-push@2:
         inputs:
         - cache_paths: "./node_modules -> ./yarn.lock"
