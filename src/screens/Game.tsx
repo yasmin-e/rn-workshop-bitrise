@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+
 import { Button, QuizQuestion } from '../components';
 import { maxLives, maxQuestions } from '../config';
 import { IQuiz } from '../interfaces';
@@ -27,8 +28,7 @@ const Game = ({
   isLifelineUsed,
   setIsLifelineUsed,
 }: IProps) => {
-  const currentQuestion =
-    questions.length > 0 ? questions[currentIndex] : undefined;
+  const currentQuestion = questions.length > 0 ? questions[currentIndex] : undefined;
 
   const [answers, setAnswers] = useState<string[]>([]);
   const shuffled = useMemo(() => shuffle(answers), [answers]);
@@ -37,23 +37,16 @@ const Game = ({
     if (isLifelineUsed) return;
 
     if (currentQuestion) {
-      const incorrectShuffled = shuffle(
-        currentQuestion.incorrect_answers
-      ).slice(0, 2);
+      const incorrectShuffled = shuffle(currentQuestion.incorrect_answers).slice(0, 2);
 
-      setAnswers((all) =>
-        all.filter((ans) => !incorrectShuffled.includes(ans))
-      );
+      setAnswers((all) => all.filter((ans) => !incorrectShuffled.includes(ans)));
       setIsLifelineUsed(true);
     }
   }, [currentQuestion, isLifelineUsed]);
 
   useEffect(() => {
     if (currentQuestion) {
-      setAnswers([
-        currentQuestion.correct_answer,
-        ...currentQuestion.incorrect_answers,
-      ]);
+      setAnswers([currentQuestion.correct_answer, ...currentQuestion.incorrect_answers]);
     }
   }, [currentQuestion]);
 
@@ -61,17 +54,10 @@ const Game = ({
     <>
       <View style={styles.row}>
         <Text style={styles.header}>Quiz</Text>
-        <Button
-          fullWidth={false}
-          onPress={onResetGame}
-          inverted
-          text="New game"
-        />
+        <Button fullWidth={false} onPress={onResetGame} inverted text="New game" />
       </View>
       <View style={styles.row}>
-        <Text testID="currentStep">
-          {`${currentIndex + 1} / ${maxQuestions}`}
-        </Text>
+        <Text testID="currentStep">{`${currentIndex + 1} / ${maxQuestions}`}</Text>
         {Array(maxLives)
           .fill('')
           .map((_, i) => (

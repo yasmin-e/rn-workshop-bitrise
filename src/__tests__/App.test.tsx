@@ -1,8 +1,9 @@
-import { fireEvent, render, waitFor } from '@testing-library/react-native';
-import App from '../App';
 import React from 'react';
-import { maxLives, maxQuestions } from '../config';
+import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import fetch from 'jest-fetch-mock';
+
+import App from '../App';
+import { maxLives, maxQuestions } from '../config';
 import { IResponse } from '../interfaces';
 
 const res: IResponse = {
@@ -10,9 +11,9 @@ const res: IResponse = {
   results: [
     {
       category: '1',
-      correct_answer: 'x',
+      correct_answer: 'Correct option',
       difficulty: 'easy',
-      incorrect_answers: ['incorrect', 'b', 'c'],
+      incorrect_answers: ['An incorrect option', 'Other bad option', 'This is not the right option'],
       question: 'This is a question',
       type: 'multiple',
     },
@@ -52,32 +53,26 @@ describe('Game', () => {
   });
 
   it('should increase step number if correct answer given', async () => {
-    const { getByTestId, findByTestId, findByText, getAllByTestId } = render(
-      <App />
-    );
-    const correctButton = await findByTestId('answer-0');
+    const { getByTestId, getByText, update } = render(<App />);
 
+    const correctButton = await waitFor(() => getByText('Correct option'));
     fireEvent.press(correctButton);
 
-    waitFor(() => {
-      expect(getByTestId('currentStep').children[0]).toBe(
-        `2 / ${maxQuestions}`
-      );
-    });
+    const currentStepLabel = await getByTestId('currentStep').children[0];
+    expect(currentStepLabel).toBe(`2 / ${maxQuestions}`);
   });
 
   it('should halve the possible answers', async () => {
-    const { getByTestId, findAllByTestId } = render(<App />);
+    const { getByTestId, findAllByTestId, getAllByTestId } = render(<App />);
 
     const button = getByTestId('thanos');
 
     const allAnswers = await findAllByTestId(/answer-[0-9]/);
-
     expect(allAnswers).toHaveLength(4);
 
     fireEvent.press(button);
-    const answersAfterSnap = await findAllByTestId(/answer-[0-9]/);
 
+    const answersAfterSnap = await getAllByTestId(/answer-[0-9]/);
     expect(answersAfterSnap).toHaveLength(2);
   });
 });
