@@ -8,6 +8,7 @@ export default function App() {
   const { questions, reload, isLoading } = useQuiz();
   const [lives, setLives] = useState(maxLives);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isLifelineUsed, setIsLifelineUsed] = useState(false);
 
   const handleAnswerSelected = useCallback(
     (answer) => {
@@ -25,6 +26,7 @@ export default function App() {
     setLives(maxLives);
     setCurrentQuestionIndex(0);
     reload();
+    setIsLifelineUsed(false);
   };
 
   return (
@@ -37,6 +39,8 @@ export default function App() {
           onResetGame={handleResetGame}
           isLoading={isLoading}
           lives={lives}
+          isLifelineUsed={isLifelineUsed}
+          setIsLifelineUsed={setIsLifelineUsed}
         />
       )}
 
