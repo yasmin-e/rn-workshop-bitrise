@@ -25,22 +25,21 @@ describe('App', () => {
     });
 
     it('should have all lives by default', async () => {
-        const {findAllByTestId} = render(<App />);
+        const { findAllByTestId } = render(<App />);
         const hearts = await findAllByTestId('heart-full');
 
         expect(hearts).toHaveLength(maxLives);
     });
 
     it('should show first step text', async () => {
-        const {findByTestId} = render(<App />);
+        const { findByTestId } = render(<App />);
         const currentStep = await findByTestId('currentStep');
 
         expect(currentStep.props.children).toEqual(`1 / ${maxQuestions}`);
     });
 
     it('should decrease lives when incorrect selected', async () => {
-        const {findByTestId} = render(<App />);
-        const {findAllByTestId} = render(<App />);
+        const { findByTestId, findAllByTestId, getByText } = render(<App />);
 
         const question = await findByTestId('question');
 
@@ -48,21 +47,20 @@ describe('App', () => {
 
         const incorrectButton = getByText('Not really');
         fireEvent.press(incorrectButton);
-
-        const hearts = findAllByTestId('heart-full');
-        const emptyHearts = findAllByTestId('heart-empty');
+        const hearts = await findAllByTestId('heart-full');
+        const emptyHearts = await findAllByTestId('heart-empty');
 
         expect(hearts).toHaveLength(maxLives - 1);
         expect(emptyHearts).toHaveLength(1);
     });
 
     it('should increase stepCount if correct answer selected', async () => {
-        const {getByText} = render(<App />);
+        const { getByText } = render(<App />);
 
         const correctButton = await waitFor(() => getByText('YES'));
         fireEvent.press(correctButton);
         const nextStep = getByText(`2 / ${maxQuestions}`);
 
         expect(nextStep.props.children).toEqual(`2 / ${maxQuestions}`);
-    });
+    })
 });
